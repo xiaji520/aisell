@@ -52,7 +52,7 @@
 </div>
 <div id="mainTab" class="easyui-tabs" data-options="region:'center'">
     <div title="首页" style="padding:20px;display:none;">
-        欢迎来到易用宝操作系统!
+       <h3> 欢迎来到易用宝操作系统!</h3>
     </div>
 </div>
 </body>

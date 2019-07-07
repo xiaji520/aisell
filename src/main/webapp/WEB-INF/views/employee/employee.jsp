@@ -57,17 +57,17 @@
 <div id="editDialog" class="easyui-dialog" title="功能编辑" style="width:400px;"
      data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <form id="editForm" method="post">
+        <input id="employeeId" type="hidden" name="id" />
         <table cellpadding="5">
             <tr>
                 <td>用户名:</td><%--data-options="required:true"必须输入--%>
-<%--                <td><input class="easyui-validatebox" type="text" name="username" data-options="required:true,validType:'checkName"></input></td>--%>
                 <td><input class="easyui-validatebox" type="text" name="username" data-options="required:true,validType:'checkName'"/></td>
             </tr>
-            <tr>
+            <tr data-edit="true">
                 <td>密码:</td>
                 <td><input id="password" class="easyui-validatebox" type="password" name="password" data-options="required:true"/></td>
             </tr>
-            <tr>
+            <tr data-edit="true">
                 <td>确认密码:</td>
                 <td><input class="easyui-validatebox" type="password" data-options="required:true" validType="equals['password','id']"/></td>
             </tr>

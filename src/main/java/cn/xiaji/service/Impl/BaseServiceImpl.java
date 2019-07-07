@@ -41,7 +41,7 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements IBa
     }
 
     @Override
-    public T findone(ID id) {
+    public T findOne(ID id) {
         return baseRepository.findOne(id);
     }
 

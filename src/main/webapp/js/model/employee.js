@@ -21,10 +21,12 @@ $.extend($.fn.validatebox.defaults.rules, {
          param : 传过来的值(数组)
          */
         validator: function (value, param) {
+            //拿到员工的id
+            var employeeId = $("#employeeId").val();
             //用ajax的同步提交!!
             var result = $.ajax({
                 url: "/employee/checkUsername",
-                data: {username: value},
+                data: {username: value, id: employeeId},
                 async: false //false  同步
             }).responseText;
             result = JSON.parse(result);
@@ -63,15 +65,26 @@ $(function () {
         },
         //添加
         add() {
+            //让密码框失效且隐藏起来
+            $("*[data-edit]").show();
+            $("*[data-edit] input").validatebox("enable");
+            //清空form中的数据
+            editForm.form("clear");
             //打开弹出框(居中)
             editDialog.dialog("center").dialog("open");
         },
         //保存
         save() {
+            var url = "/employee/save";
+            //获到id的值
+            var employeeId = $("#employeeId").val();
+            if (employeeId) {
+                url = "/employee/update?cmd=_upd_";
+            }
             //easyui的form
             editForm.form('submit', {
                 //提交路径
-                url: "/employee/save",
+                url: url,
                 //提交前的操作
                 onSubmit: function () {
                     // 做一些检查
@@ -92,9 +105,27 @@ $(function () {
         },
         //修改
         update() {
-            alert("修改")
-        },
+            //获取到选中的那一行数据
+            let row = employeeGrid.datagrid("getSelected");
+            //如果没有选中，给出提示后面的代码就不再执行
+            if (!row) {
+                $.messager.alert('警告', '请选中再修改!', 'warning');
+                return;
+            }
+            //清空form中的数据
+            editForm.form("clear");
+            //让密码框失效且隐藏起来
+            $("*[data-edit]").hide();
+            $("*[data-edit] input").validatebox("disable");
 
+            //把结果进行回显
+            if (row.department) {
+                row["department.id"] = row.department.id;
+            }
+            editForm.form("load", row);
+            //打开弹出框(居中)
+            editDialog.dialog("center").dialog("open");
+        },
         //删除
         del() {
             //获取选中数据

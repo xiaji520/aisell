@@ -11,7 +11,7 @@ public interface IBaseService<T, ID extends Serializable> {
 
     void delete(ID id);
 
-    T findone(ID id);
+    T findOne(ID id);
 
     List<T> findAll();
 

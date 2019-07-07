@@ -6,8 +6,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--easyui样式支持-->
 <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
-<!--easyui图标支持-->
-<link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
+<!--easyui图标支持(自定义的)-->
+<%--<link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">--%>
+<link rel="stylesheet" type="text/css" href="/easyui/plugin/InsdepUI/icon.css">
 <!--easyui颜色样式支持-->
 <link rel="stylesheet" type="text/css" href="/easyui/themes/color.css">
 <!--jquery支持-->

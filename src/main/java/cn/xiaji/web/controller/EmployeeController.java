@@ -1,6 +1,7 @@
 package cn.xiaji.web.controller;
 //encoding: utf-8
 
+import cn.xiaji.common.JsonResult;
 import cn.xiaji.common.UIPage;
 import cn.xiaji.domain.Employee;
 import cn.xiaji.query.EmployeeQuery;
@@ -37,6 +38,39 @@ public class EmployeeController extends BaseController {
     public UIPage<Employee> page(EmployeeQuery query) {
         Page page = employeeService.findPageByQuery(query);
         return new UIPage(page);
+    }
+
+    //删除
+    @RequestMapping("/delete")
+    @ResponseBody
+    public JsonResult delete(Long id) {
+        try {
+            employeeService.delete(id);
+            return new JsonResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JsonResult(false, e.getMessage());
+        }
+    }
+
+    //保存
+    @RequestMapping("/save")
+    @ResponseBody
+    public JsonResult save(Employee employee) {
+        try {
+            employeeService.save(employee);
+            return new JsonResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JsonResult(false, e.getMessage());
+        }
+    }
+
+    //验证用户名
+    @RequestMapping("/checkUsername")
+    @ResponseBody
+    public Boolean checkUsername(String username) {
+        return employeeService.checkUsername(username);
     }
 
 }

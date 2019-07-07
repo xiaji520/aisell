@@ -13,6 +13,10 @@ import java.util.List;
  */
 //改继承BaseRepository
 public interface EmployeeRepository extends BaseRepository<Employee, Long> {
+    //验证用户名是否存在
+    @Query("select count(o) from Employee o where o.username=?1")
+    Long getCountByUsername(String username);
+
     //根据用户名查询
     Employee findByUsername(String uername);
 

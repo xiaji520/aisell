@@ -68,6 +68,8 @@ $(function () {
             //让密码框失效且隐藏起来
             $("*[data-edit]").show();
             $("*[data-edit] input").validatebox("enable");
+            //修改弹出框Title
+            editDialog.dialog('setTitle', "添加");
             //清空form中的数据
             editForm.form("clear");
             //打开弹出框(居中)
@@ -106,7 +108,7 @@ $(function () {
         //修改
         update() {
             //获取到选中的那一行数据
-            let row = employeeGrid.datagrid("getSelected");
+            var row = employeeGrid.datagrid("getSelected");
             //如果没有选中，给出提示后面的代码就不再执行
             if (!row) {
                 $.messager.alert('警告', '请选中再修改!', 'warning');
@@ -117,7 +119,8 @@ $(function () {
             //让密码框失效且隐藏起来
             $("*[data-edit]").hide();
             $("*[data-edit] input").validatebox("disable");
-
+            //修改弹出框Title
+            editDialog.dialog('setTitle', "修改");
             //把结果进行回显
             if (row.department) {
                 row["department.id"] = row.department.id;

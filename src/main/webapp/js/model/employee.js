@@ -38,6 +38,17 @@ $.extend($.fn.validatebox.defaults.rules, {
     }
 });
 
+//右键支持增删改
+function showMenu(e, rowIndex, rowData) {
+    //选中这个行
+    $("#employeeGrid").datagrid("selectRow", rowIndex);
+    //第0个位置的面板不支持相应功能
+    e.preventDefault();
+    $('#gridMenu').menu('show', {
+        left: e.pageX,
+        top: e.pageY
+    });
+}
 
 $(function () {
     //获取常用组件(分页/查询条)
@@ -45,6 +56,7 @@ $(function () {
     var searchForm = $("#searchForm");
     var editDialog = $("#editDialog");
     var editForm = $("#editForm");
+
     //绑定事件
     $("*[data-method]").on("click", function () {
         var method = $(this).data("method");
@@ -109,6 +121,7 @@ $(function () {
         update() {
             //获取到选中的那一行数据
             var row = employeeGrid.datagrid("getSelected");
+
             //如果没有选中，给出提示后面的代码就不再执行
             if (!row) {
                 $.messager.alert('警告', '请选中再修改!', 'warning');
@@ -152,8 +165,16 @@ $(function () {
                     }
                 });
             }
-        }
+        },
+    };
 
-    }
-
+    //按键扩展支持
+    $(document).bind('keydown', 'del', xiaji.del);
+    $(document).bind('keydown', 'Shift+1', xiaji.add);
+    $(document).bind('keydown', 'Shift+2', xiaji.update);
 });
+
+
+
+
+

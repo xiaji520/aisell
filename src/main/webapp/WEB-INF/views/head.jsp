@@ -28,6 +28,9 @@
 <link href="/easyui/plugin/datagrid/Site.css" rel="stylesheet"/>
 <link href="/easyui/plugin/datagrid/icon-standard.css" rel="stylesheet"/>
 
+<!-- jquery的按键扩展支持 -->
+<script src="/easyui/plugin/jquery.hotkeys.js"></script>
+
 <%--验证插件引入--%>
 <link rel="stylesheet" type="text/css" href="/easyui/plugin/validatebox/jeasyui.extensions.validatebox.css">
 <script type="text/javascript" src="/easyui/plugin/validatebox/jeasyui.extensions.validatebox.rules.js"></script>

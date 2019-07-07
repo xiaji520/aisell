@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>易用宝</title>
     <%@include file="/WEB-INF/views/head.jsp" %>
     <script src="/js/model/employee.js"></script>
 </head>
@@ -21,7 +21,8 @@
        fitColumns:true,
        singleSelect:true,
        pagination:true,
-       toolbar:'#gridTools'">
+       toolbar:'#gridTools',
+       onRowContextMenu:showMenu">
     <thead>
     <tr>
         <th data-options="field:'id',width:50,align:'center'">编码</th>
@@ -34,6 +35,13 @@
     </tr>
     </thead>
 </table>
+
+<%--右键支持增删改--%>
+<div id="gridMenu" class="easyui-menu" style="width:120px;">
+    <div data-options="iconCls:'icon-add'"  data-method="add" >添加</div>
+    <div data-options="iconCls:'icon-edit'"  data-method="update">修改</div>
+    <div data-options="iconCls:'icon-remove'" data-method="del">删除</div>
+</div>
 
 <%--grid顶部工具栏--%>
 <div id="gridTools" style="padding:5px;height:auto">

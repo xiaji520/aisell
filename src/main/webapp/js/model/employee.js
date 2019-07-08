@@ -77,7 +77,7 @@ $(function () {
         },
         //添加
         add() {
-            //让密码框失效且隐藏起来
+            //让密码框显示
             $("*[data-edit]").show();
             $("*[data-edit] input").validatebox("enable");
             //修改弹出框Title
@@ -121,7 +121,6 @@ $(function () {
         update() {
             //获取到选中的那一行数据
             var row = employeeGrid.datagrid("getSelected");
-
             //如果没有选中，给出提示后面的代码就不再执行
             if (!row) {
                 $.messager.alert('警告', '请选中再修改!', 'warning');
@@ -141,6 +140,7 @@ $(function () {
             editForm.form("load", row);
             //打开弹出框(居中)
             editDialog.dialog("center").dialog("open");
+
         },
         //删除
         del() {
@@ -172,6 +172,18 @@ $(function () {
     $(document).bind('keydown', 'del', xiaji.del);
     $(document).bind('keydown', 'Shift+1', xiaji.add);
     $(document).bind('keydown', 'Shift+2', xiaji.update);
+
+    //获取点击信息
+    employeeGrid.datagrid({
+        onDblClickCell: function (index, field, value) {
+            //动态调用
+            window.xiaji.update();
+           /* $(this).dialog('beginEdit', index);
+            var ed = $(this).dialog('getEditor', {index: index, field: field});
+            $(ed.target).focus();*/
+        }
+    });
+
 });
 
 

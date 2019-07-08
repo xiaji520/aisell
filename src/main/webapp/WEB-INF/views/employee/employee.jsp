@@ -1,14 +1,12 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: Administrator
+  User: xj
   Date: 2019/7/5
-  Time: 10:44
-  To change this template use File | Settings | File Templates.
+  Time: 11:48
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>易用宝</title>
+    <title>易用宝,employee管理</title>
     <%@include file="/WEB-INF/views/head.jsp" %>
     <script src="/js/model/employee.js"></script>
 </head>
@@ -38,8 +36,8 @@
 
 <%--右键支持增删改--%>
 <div id="gridMenu" class="easyui-menu" style="width:120px;">
-    <div data-options="iconCls:'icon-add'"  data-method="add" >添加</div>
-    <div data-options="iconCls:'icon-edit'"  data-method="update">修改</div>
+    <div data-options="iconCls:'icon-add'" data-method="add">添加</div>
+    <div data-options="iconCls:'icon-edit'" data-method="update">修改</div>
     <div data-options="iconCls:'icon-remove'" data-method="del">删除</div>
 </div>
 
@@ -65,33 +63,40 @@
 <div id="editDialog" class="easyui-dialog" title="功能编辑" style="width:400px;"
      data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <form id="editForm" method="post">
-        <input id="employeeId" type="hidden" name="id" />
+        <input id="employeeId" type="hidden" name="id"/>
         <table cellpadding="5">
             <tr>
-                <td>用户名:</td><%--data-options="required:true"必须输入--%>
-                <td><input class="easyui-validatebox" type="text" name="username" data-options="required:true,validType:'checkName'"/></td>
+                <td>用户名:</td>
+                <%--data-options="required:true"必须输入--%>
+                <td><input class="easyui-validatebox" type="text" name="username"
+                           data-options="required:true,validType:'checkName'"/></td>
             </tr>
             <tr data-edit="true">
                 <td>密码:</td>
-                <td><input id="password" class="easyui-validatebox" type="password" name="password" data-options="required:true"/></td>
+                <td><input id="password" class="easyui-validatebox" type="password" name="password"
+                           data-options="required:true"/></td>
             </tr>
             <tr data-edit="true">
                 <td>确认密码:</td>
-                <td><input class="easyui-validatebox" type="password" data-options="required:true" validType="equals['password','id']"/></td>
+                <td><input class="easyui-validatebox" type="password" data-options="required:true"
+                           validType="equals['password','id']"/></td>
             </tr>
             <tr>
                 <td>邮件:</td>
-                <td><input class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"/></td>
+                <td><input class="easyui-validatebox" type="text" name="email"
+                           data-options="required:true,validType:'email'"/></td>
             </tr>
             <tr>
-                <td>年龄:</td><%--integerRange[1,100]扩展插件--%>
-                <td><input class="easyui-validatebox" type="text" name="age" data-options="validType:'integerRange[1,100]'"/></td>
+                <td>年龄:</td>
+                <%--integerRange[1,100]扩展插件--%>
+                <td><input class="easyui-validatebox" type="text" name="age"
+                           data-options="validType:'integerRange[1,100]'"/></td>
             </tr>
             <tr>
                 <td>部门:</td>
                 <td>
-                    <input  name="department.id" class="easyui-combobox"   panelHeight="auto"
-                            data-options="valueField:'id',textField:'name',url:'/util/dept',required:true" />
+                    <input name="department.id" class="easyui-combobox" panelHeight="auto"
+                           data-options="valueField:'id',textField:'name',url:'/util/dept',required:true"/>
                 </td>
             </tr>
         </table>

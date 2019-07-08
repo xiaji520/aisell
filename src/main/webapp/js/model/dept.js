@@ -1,47 +1,7 @@
-/*
-    value 当前单元格中的值
-    row 当前单元格对应的整行的值
-    index 行的索引
- */
-function formatImage(value, row, index) {
-    return `<img src="${value}" width="55" height="55">`;
-}
-
-function formatDept(value) {
-    return value ? value.name : "";
-}
-
-//自定义验证用户名是否存在
-$.extend($.fn.validatebox.defaults.rules, {
-    //验证名称
-    checkName: {
-        //验证的规则
-        /*
-         value ：文本框当前的值
-         param : 传过来的值(数组)
-         */
-        validator: function (value, param) {
-            //拿到员工的id
-            var employeeId = $("#employeeId").val();
-            //用ajax的同步提交!!
-            var result = $.ajax({
-                url: "/employee/checkUsername",
-                data: {username: value, id: employeeId},
-                async: false //false  同步
-            }).responseText;
-            result = JSON.parse(result);
-            //返回false,代表验证失败
-            return result;
-        },
-        //失败提示
-        message: '用户名已存在!'
-    }
-});
-
 //右键支持增删改
 function showMenu(e, rowIndex, rowData) {
     //选中这个行
-    $("#employeeGrid").datagrid("selectRow", rowIndex);
+    $("#deptGrid").datagrid("selectRow", rowIndex);
     //第0个位置的面板不支持相应功能
     e.preventDefault();
     $('#gridMenu').menu('show', {
@@ -52,7 +12,7 @@ function showMenu(e, rowIndex, rowData) {
 
 $(function () {
     //获取常用组件(分页/查询条)
-    var employeeGrid = $("#employeeGrid");
+    var deptGrid = $("#deptGrid");
     var searchForm = $("#searchForm");
     var editDialog = $("#editDialog");
     var editForm = $("#editForm");
@@ -69,7 +29,7 @@ $(function () {
         search() {
             //serializeObject:可以拿到form中的所有数据,封装成json对象
             var params = searchForm.serializeObject();
-            employeeGrid.datagrid("load", params);
+            deptGrid.datagrid("load", params);
         },
         //关闭窗口
         closeDialog() {
@@ -89,11 +49,11 @@ $(function () {
         },
         //保存
         save() {
-            var url = "/employee/save";
+            var url = "/dept/save";
             //获到id的值
-            var employeeId = $("#employeeId").val();
-            if (employeeId) {
-                url = "/employee/update?cmd=_upd_";
+            var deptId = $("#deptId").val();
+            if (deptId) {
+                url = "/dept/update?cmd=_upd_";
             }
             //easyui的form
             editForm.form('submit', {
@@ -108,7 +68,7 @@ $(function () {
                 success: function (data) {
                     var result = JSON.parse(data);
                     if (result.success) {
-                        employeeGrid.datagrid("reload");
+                        deptGrid.datagrid("reload");
                     } else {
                         $.messager.alert('错误', `失败了,失败原因::${result.msg}`, "error");
                     }
@@ -120,7 +80,7 @@ $(function () {
         //修改
         update() {
             //获取到选中的那一行数据
-            var row = employeeGrid.datagrid("getSelected");
+            var row = deptGrid.datagrid("getSelected");
             //如果没有选中，给出提示后面的代码就不再执行
             if (!row) {
                 $.messager.alert('警告', '请选中再修改!', 'warning');
@@ -145,7 +105,7 @@ $(function () {
         //删除
         del() {
             //获取选中数据
-            var row = employeeGrid.datagrid('getSelected');
+            var row = deptGrid.datagrid('getSelected');
             //如果没有选中给提示 选中就是否确定删除
             if (!row) {
                 $.messager.alert('警告', '请选中再删除!', 'warning');
@@ -154,9 +114,9 @@ $(function () {
                 $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
                     if (r) {
                         //选是 确定删除
-                        $.get("/employee/delete", {id: row.id}, function (result) {
+                        $.get("/dept/delete", {id: row.id}, function (result) {
                             if (result.success) {
-                                employeeGrid.datagrid("reload");
+                                deptGrid.datagrid("reload");
                             } else {
                                 $.messager.alert('错误', `失败了,失败原因:${result.msg}`, "error");
                             }
@@ -174,17 +134,11 @@ $(function () {
     $(document).bind('keydown', 'Shift+2', xiaji.update);
 
      //获取点击信息
-     employeeGrid.datagrid({
+     deptGrid.datagrid({
          onDblClickCell: function (index, field, value) {
              //动态调用
              window.xiaji.update();
          }
      });
-
+     
 });
-
-
-
-
-
-

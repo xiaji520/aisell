@@ -100,7 +100,6 @@ public class Employee extends BaseDomain {
                 ", email='" + email + '\'' +
                 ", headImage='" + headImage + '\'' +
                 ", age=" + age +
-                ", department=" + department +
                 ", id=" + id +
                 '}';
     }

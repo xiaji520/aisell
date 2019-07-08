@@ -1,0 +1,9 @@
+<html>
+<head>
+    ##注释
+    ${username},hello,你好!
+    ##对象获取
+    ${employee.username}--------${employee.age}
+    $!{employee.www}
+</head>
+</html>

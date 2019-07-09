@@ -17,17 +17,19 @@
 <table id="employeeGrid" class="easyui-datagrid"
        data-options="url:'/employee/page',
        fitColumns:true,
-       singleSelect:true,
+       singleSelect:false,
+       checkbox:true,
        pagination:true,
+       onDblClickCell:onDblClickCell,
        toolbar:'#gridTools',
        onRowContextMenu:showMenu">
     <thead>
     <tr>
-        <th data-options="field:'id',width:50,align:'center'">编码</th>
+        <th data-options="field:'id',width:50,align:'center'">编号</th>
         <th data-options="field:'headImage',width:50,formatter:formatImage,align:'center'">头像</th>
         <th data-options="field:'username',width:60,align:'center'" sortable="true">名称</th>
         <th data-options="field:'password',width:120">密码</th>
-        <th data-options="field:'age',width:50,align:'center'" sortable="true">年龄</th>
+        <th data-options="field:'age',width:50,align:'center',editor:{type:'numberbox'}" sortable="true">年龄</th>
         <th data-options="field:'email',width:100,align:'center'">邮箱</th>
         <th data-options="field:'department',width:50,formatter:formatDept,align:'center'" sortable="true">部门</th>
     </tr>
@@ -39,6 +41,7 @@
     <div data-options="iconCls:'icon-add'" data-method="add">添加</div>
     <div data-options="iconCls:'icon-edit'" data-method="update">修改</div>
     <div data-options="iconCls:'icon-remove'" data-method="del">删除</div>
+    <div data-options="iconCls:'icon-remove'" data-method="delMore">批量删除</div>
 </div>
 
 <%--grid顶部工具栏--%>
@@ -48,6 +51,7 @@
         <a href="#" data-method="add" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
         <a href="#" data-method="update" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
         <a href="#" data-method="del" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+        <a href="#" data-method="delMore" class="easyui-linkbutton" iconCls="icon-remove" plain="true">批量删除</a>
     </div>
     <%--查询条--%>
     <form id="searchForm">

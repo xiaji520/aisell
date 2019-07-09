@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,6 +66,7 @@ public class EmployeeController extends BaseController {
             return new JsonResult(false, e.getMessage());
         }
     }
+
 
     //修改
     @RequestMapping("/update")

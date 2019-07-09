@@ -50,6 +50,11 @@ function showMenu(e, rowIndex, rowData) {
     });
 }
 
+//双击打开编辑
+function onDblClickCell() {
+    window.xiaji.update();
+}
+
 $(function () {
     //获取常用组件(分页/查询条)
     var employeeGrid = $("#employeeGrid");
@@ -166,22 +171,48 @@ $(function () {
                 });
             }
         },
+        //批量删除
+        delMore() {
+            //获取选中数据
+            var rows = employeeGrid.datagrid('getSelections');
+            //如果没有选中给提示 选中就是否确定删除
+            if (rows.length == 0) {
+                $.messager.alert('警告', '请选中再删除!', 'warning');
+                return;
+            } else {
+                $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
+                    if (r) {
+                        //定义变量值
+                        var ids = [];
+                        for (var i = 0; i < rows.length; i++) {
+                            //选是 确定删除
+                            $.get("/employee/delete", {id: rows[i].id}, function (result) {
+                                if (result.success) {
+                                    employeeGrid.datagrid("reload");
+                                } else {
+                                    $.messager.alert('错误', `失败了,失败原因:${result.msg}`, "error");
+                                }
+
+                            })
+                        }
+                    }
+                });
+            }
+        }
     };
 
     //按键扩展支持
     $(document).bind('keydown', 'del', xiaji.del);
     $(document).bind('keydown', 'Shift+1', xiaji.add);
     $(document).bind('keydown', 'Shift+2', xiaji.update);
-
-     //获取点击信息
-     employeeGrid.datagrid({
-         onDblClickCell: function (index, field, value) {
-             //动态调用
-             window.xiaji.update();
-         }
-     });
+    $(document).bind('keydown', 'Shift+3', xiaji.delMore);
 
 });
+
+
+
+
+
 
 
 

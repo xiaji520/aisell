@@ -11,15 +11,16 @@
 <table id="deptGrid" class="easyui-datagrid"
        data-options="url:'/dept/page',
        fitColumns:true,
-       singleSelect:true,
+       singleSelect:false,
        pagination:true,
+       onDblClickCell:onDblClickCell,
        toolbar:'#gridTools',
        onRowContextMenu:showMenu">
     <thead>
     <tr>
-                    <th width="20"  field="id" sortable="true">id</th>
-                    <th width="20"  field="name" sortable="true">name</th>
-            </tr>
+        <th width="20" field="id" sortable="true">id</th>
+        <th width="20" field="name" sortable="true">name</th>
+    </tr>
     </thead>
 </table>
 
@@ -28,6 +29,7 @@
     <div data-options="iconCls:'icon-add'" data-method="add">添加</div>
     <div data-options="iconCls:'icon-edit'" data-method="update">修改</div>
     <div data-options="iconCls:'icon-remove'" data-method="del">删除</div>
+    <div data-options="iconCls:'icon-remove'" data-method="delMore">批量删除</div>
 </div>
 
 <%--grid顶部工具栏--%>
@@ -37,6 +39,7 @@
         <a href="#" data-method="add" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
         <a href="#" data-method="update" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
         <a href="#" data-method="del" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+        <a href="#" data-method="delMore" class="easyui-linkbutton" iconCls="icon-remove" plain="true">批量删除</a>
     </div>
     <%--查询条--%>
     <form id="searchForm">
@@ -51,12 +54,12 @@
     <form id="editForm" method="post">
         <input id="deptId" type="hidden" name="id"/>
         <table cellpadding="5">
-                    <tr>
+            <tr>
                 <td>name:</td>
                 <td><input class="easyui-validatebox" type="text" name="name"
                            data-options="required:true"/></td>
             </tr>
-                 </table>
+        </table>
     </form>
     <div style="text-align:center;padding:5px">
         <a href="javascript:void(0)" class="easyui-linkbutton" data-method="save">提交</a>

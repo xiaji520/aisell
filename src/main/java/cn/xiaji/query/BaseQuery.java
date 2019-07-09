@@ -6,6 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.math.BigDecimal;
+
+
 /**
  * @author: xj
  * @contact: xiaruji520@gmail.com

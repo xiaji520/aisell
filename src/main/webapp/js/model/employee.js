@@ -62,6 +62,9 @@ $(function () {
     var editDialog = $("#editDialog");
     var editForm = $("#editForm");
 
+    $("*[data-method='clsRecycle']").hide();
+    $("*[data-method='enableEmployee']").hide();
+
     //绑定事件
     $("*[data-method]").on("click", function () {
         var method = $(this).data("method");
@@ -183,7 +186,6 @@ $(function () {
                 $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
                     if (r) {
                         //定义变量值
-                        var ids = [];
                         for (var i = 0; i < rows.length; i++) {
                             //选是 确定删除
                             $.get("/employee/delete", {id: rows[i].id}, function (result) {
@@ -198,6 +200,49 @@ $(function () {
                     }
                 });
             }
+        },
+
+        //进入回收站
+        showRecycle() {
+            $("*[data-method='showRecycle']").hide();
+            $("*[data-method='clsRecycle']").show();
+            $("*[data-method='enableEmployee']").show();
+            employeeGrid.datagrid({url: "/employee/page?cmd=_isdelete_"});
+        },
+
+        //退出回收站
+        clsRecycle() {
+            $("*[data-method='clsRecycle']").hide();
+            $("*[data-method='enableEmployee']").hide();
+            employeeGrid.datagrid({url: "/employee/page"});
+        },
+        //启用员工
+        enableEmployee() {
+            //获取选中数据
+            var rows = employeeGrid.datagrid('getSelections');
+            //如果没有选中给提示 选中就是否确定恢复
+            if (rows.length == 0) {
+                $.messager.alert('警告', '请选中再恢复!', 'warning');
+                return;
+            } else {
+                $.messager.confirm('确认', '您确认想要恢复记录吗？', function (r) {
+                    if (r) {
+                        //定义变量值
+                        for (var i = 0; i < rows.length; i++) {
+                            //选是 确定恢复
+                            $.get("/employee/delete?cmd=_rec_", {id: rows[i].id}, function (result) {
+                                if (result.success) {
+                                    employeeGrid.datagrid("reload");
+                                } else {
+                                    $.messager.alert('错误', `失败了,失败原因:${result.msg}`, "error");
+                                }
+
+                            })
+                        }
+                    }
+                });
+            }
+
         }
     };
 

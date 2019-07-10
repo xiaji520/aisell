@@ -37,7 +37,10 @@ public class EmployeeController extends BaseController {
 
     @RequestMapping("/page")
     @ResponseBody
-    public UIPage<Employee> page(EmployeeQuery query) {
+    public UIPage<Employee> page(EmployeeQuery query, String cmd) {
+        if ("_isdelete_".equals(cmd)) {
+            query.setIsdelete(0);
+        }
         Page page = employeeService.findPageByQuery(query);
         return new UIPage(page);
     }
@@ -57,9 +60,15 @@ public class EmployeeController extends BaseController {
     //删除
     @RequestMapping("/delete")
     @ResponseBody
-    public JsonResult delete(Long id) {
+    public JsonResult delete(Long id, String cmd) {
+        Employee employee = employeeService.findOne(id);
+        if ("_rec_".equals(cmd)) {
+            employee.setIsdelete(1);
+        } else {
+            employee.setIsdelete(0);
+        }
         try {
-            employeeService.delete(id);
+            employeeService.save(employee);
             return new JsonResult();
         } catch (Exception e) {
             e.printStackTrace();

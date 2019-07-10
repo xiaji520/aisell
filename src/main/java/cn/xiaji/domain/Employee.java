@@ -23,8 +23,10 @@ public class Employee extends BaseDomain {
     private String headImage;
     @Column(length = 11)
     private Integer age;
+    @Column(length = 1)
+    private Integer isdelete;
 
-  @ManyToMany
+    @ManyToMany
     @JoinTable(
             name = "employee_role",
             joinColumns = @JoinColumn(name = "employee_id"),
@@ -76,6 +78,13 @@ public class Employee extends BaseDomain {
         this.age = age;
     }
 
+    public Integer getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(Integer isdelete) {
+        this.isdelete = isdelete;
+    }
 
     public List<Role> getRoles() {
         return roles;
@@ -84,6 +93,7 @@ public class Employee extends BaseDomain {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
     public Department getDepartment() {
         return department;
     }
@@ -100,6 +110,8 @@ public class Employee extends BaseDomain {
                 ", email='" + email + '\'' +
                 ", headImage='" + headImage + '\'' +
                 ", age=" + age +
+                ", isdelete=" + isdelete +
+                ", roles=" + roles +
                 ", id=" + id +
                 '}';
     }

@@ -21,6 +21,8 @@ public class EmployeeQuery extends BaseQuery {
     private Integer age;
     //查询部门支持
     private Long departmentId;
+    //回收站支持
+    private Integer isdelete = 1;
 
     //返回查询条件
     @Override
@@ -31,6 +33,8 @@ public class EmployeeQuery extends BaseQuery {
                 .gt(age != null, "age", age)
                 //查询部门支持
                 .eq(departmentId != null, "department.id", departmentId)
+                //回收站功能添加字段
+                .eq(isdelete != null, "isdelete", isdelete)
                 .build();
         return build;
     }
@@ -65,5 +69,13 @@ public class EmployeeQuery extends BaseQuery {
 
     public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public Integer getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(Integer isdelete) {
+        this.isdelete = isdelete;
     }
 }

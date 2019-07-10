@@ -42,6 +42,7 @@
     <div data-options="iconCls:'icon-edit'" data-method="update">修改</div>
     <div data-options="iconCls:'icon-remove'" data-method="del">删除</div>
     <div data-options="iconCls:'icon-remove'" data-method="delMore">批量删除</div>
+    <div data-options="iconCls:'icon-edit'" data-method="enableEmployee">批量恢复</div>
 </div>
 
 <%--grid顶部工具栏--%>
@@ -52,6 +53,10 @@
         <a href="#" data-method="update" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
         <a href="#" data-method="del" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
         <a href="#" data-method="delMore" class="easyui-linkbutton" iconCls="icon-remove" plain="true">批量删除</a>
+        <a href="#" data-method="showRecycle" class="easyui-linkbutton" iconCls="icon-edit" plain="true">进入回收站</a>
+        <a id="enableEmployee" href="#" data-method="enableEmployee" class="easyui-linkbutton" iconCls="icon-edit"
+           plain="true">批量恢复</a>
+        <a href="#" data-method="clsRecycle" class="easyui-linkbutton" iconCls="icon-edit" plain="true">退出回收站</a>
     </div>
     <%--查询条--%>
     <form id="searchForm">

@@ -55,7 +55,7 @@ public class LoginController {
         CaptchaUtil.setHeader(response);
 
         // 三个参数分别为宽、高、位数
-        SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 6);
+        SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
 
         // 设置字体
         specCaptcha.setFont(getFont());

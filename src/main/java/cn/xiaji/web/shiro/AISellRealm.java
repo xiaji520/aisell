@@ -1,9 +1,10 @@
-package cn.xiaji.realm;
+package cn.xiaji.web.shiro;
 //encoding: utf-8
 
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -14,33 +15,15 @@ import java.util.Set;
 /**
  * @author: xj
  * @contact: xiaruji520@gmail.com
- * @file: MyRealm.java
+ * @file: AISellRealm.java
  */
 /*
-自定义realm
- */
-public class MyRealm extends AuthorizingRealm {
 
-    //获取到这个Realm的名称(随便取)
+ */
+public class AISellRealm extends AuthorizingRealm {
     @Override
     public String getName() {
-        return "myRealm";
-    }
-
-    //根据用户名拿到角色
-    public Set<String> getRoles(String sername) {
-        Set<String> roles = new HashSet<String>();
-        roles.add("admin");
-        roles.add("root");
-        return roles;
-    }
-
-    //根据用户名拿到权限
-    public Set<String> getPermissions(String sername) {
-        Set<String> perms = new HashSet<String>();
-        perms.add("employee:*");
-        //perms.add("employee:update");
-        return perms;
+        return "aiSellRealm";
     }
 
     //进行授权判断(权限)
@@ -59,15 +42,29 @@ public class MyRealm extends AuthorizingRealm {
         return authorizationInfo;
     }
 
+    //根据用户名拿到角色
+    public Set<String> getRoles(String username) {
+        Set<String> roles = new HashSet<String>();
+        roles.add("admin");
+        roles.add("root");
+        return roles;
+    }
+
+    //根据用户名拿到权限
+    public Set<String> getPermissions(String username) {
+        Set<String> perms = new HashSet<String>();
+        perms.add("employee:*");
+        perms.add("dept:index");
+        return perms;
+    }
 
     //登录验证
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        //AuthorizationInfo会自动判断密码是否错误
         //1.拿令牌(拿对应的用户名)
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        String username = token.getUsername();
         //2.根据用户名取拿密码
+        String username = token.getUsername();
         String password = getByName(username);
         if (password == null) {
             //返回null为:用户名错误
@@ -82,10 +79,13 @@ public class MyRealm extends AuthorizingRealm {
 
     public String getByName(String username) {
         if ("admin".equals(username)) {
-            return "b38a1c1bd230c80ed8974ab2a3e18d6b";
+            //密码xiaji:86c764f2ac206b2060f82c0f06d519f9
+            return "86c764f2ac206b2060f82c0f06d519f9";
         } else if ("root".equals(username)) {
             return "123456";
         }
         return null;
     }
+
+
 }

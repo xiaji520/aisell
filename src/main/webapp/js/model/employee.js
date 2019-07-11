@@ -214,6 +214,7 @@ $(function () {
         clsRecycle() {
             $("*[data-method='clsRecycle']").hide();
             $("*[data-method='enableEmployee']").hide();
+            $("*[data-method='showRecycle']").show();
             employeeGrid.datagrid({url: "/employee/page"});
         },
         //启用员工

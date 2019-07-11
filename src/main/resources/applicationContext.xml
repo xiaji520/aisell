@@ -73,4 +73,6 @@
                       transaction-manager-ref="transactionManager"
     factory-class="cn.xiaji.repository.BaseRepositoryFactoryBean"/>
 
+    <!--导入shiro-->
+    <import resource="classpath:applicationContext-shiro.xml" />
 </beans>

@@ -1,11 +1,14 @@
 package cn.xiaji.service.Impl;
 //encoding: utf-8
 
+import cn.xiaji.common.MD5Utils;
 import cn.xiaji.domain.Employee;
 import cn.xiaji.repository.EmployeeRepository;
 import cn.xiaji.service.IEmployeeService;
+import com.hazelcast.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author: xj
@@ -24,5 +27,20 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee, Long> impleme
     @Override
     public Boolean checkUsername(String username) {
         return !(employeeRepository.getCountByUsername(username) > 0);
+    }
+
+    @Override
+    public Employee findByUsername(String username) {
+        return  employeeRepository.findByUsername(username);
+    }
+
+    //添加或更新 密码加密
+    @Override
+    @Transactional
+    public void save(Employee employee) {
+        if (employee.getId() == null) {
+            employee.setPassword(MD5Utils.createMD5Pwd(employee.getPassword()));
+        }
+        super.save(employee);
     }
 }

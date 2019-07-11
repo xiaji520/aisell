@@ -1,6 +1,8 @@
 package cn.xiaji.web.shiro;
 //encoding: utf-8
 
+import cn.xiaji.domain.Employee;
+import cn.xiaji.service.IEmployeeService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -8,6 +10,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +24,10 @@ import java.util.Set;
 
  */
 public class AISellRealm extends AuthorizingRealm {
+
+    @Autowired
+    private IEmployeeService employeeService;
+
     @Override
     public String getName() {
         return "aiSellRealm";
@@ -65,15 +72,15 @@ public class AISellRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //2.根据用户名取拿密码
         String username = token.getUsername();
-        String password = getByName(username);
-        if (password == null) {
+        Employee loginUser = employeeService.findByUsername(username);
+        if (loginUser == null) {
             //返回null为:用户名错误
             return null;
         }
         //获取到盐值
         ByteSource salt = ByteSource.Util.bytes("xiaji");
         //getName():只是随便起的名
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, salt, getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, loginUser.getPassword(), salt, getName());
         return authenticationInfo;
     }
 

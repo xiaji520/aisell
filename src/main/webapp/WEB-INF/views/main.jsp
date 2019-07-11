@@ -4,6 +4,7 @@
   Time: 11:48
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
     <title>易用宝首页</title>
@@ -69,6 +70,8 @@
 <body class="easyui-layout">
 <div data-options="region:'north'" style="height:100px;">
     <h1 style="text-align: center">易 用 宝</h1>
+    <%-- shiro:principal：显示主体名称--%>
+    <div style="text-align: right;padding-right:20px;">欢迎您, <shiro:principal/> <a href="/logout">登出</a></div>
 </div>
 <div data-options="region:'west',title:'菜单',split:true" style="width:230px;">
     <ul id="menuTree"></ul>
@@ -76,7 +79,7 @@
 <div id="mainTab" class="easyui-tabs" data-options="region:'center',onContextMenu:showTabMenu">
     <div title="首页" style="padding:20px;display:none;">
         <%--<h3 style="text-align: center"> 欢迎来到易用宝操作系统!</h3>--%>
-        <img src="/images/img/welcome.jpg" alt="图片走丢了..."width="960" height="650">
+        <img src="/images/img/welcome.jpg" alt="图片走丢了..." width="960" height="650">
     </div>
 </div>
 

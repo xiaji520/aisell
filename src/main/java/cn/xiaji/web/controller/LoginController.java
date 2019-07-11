@@ -13,6 +13,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import sun.security.util.Password;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,14 +85,19 @@ public class LoginController {
         }
     }*/
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String index() {
+        return "login";
+    }
 
-    @RequestMapping("/login")
-    public String login(HttpServletRequest request, String username, String password, String captcha) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult login(HttpServletRequest request, String username, String password, String captcha) {
         // 获取session中的验证码
         String code = (String) request.getSession().getAttribute("captcha");
         //判断验证码是否正确
         if (code.equals(captcha.toLowerCase())) {
-            System.out.println("验证码成功!"+username+"-----"+password);
+            System.out.println("验证码成功!" + username + "-----" + password);
             //1.拿到当前用户
             Subject subject = SecurityUtils.getSubject();
             //2.如果没有登录就让它登录
@@ -98,22 +105,35 @@ public class LoginController {
                 UsernamePasswordToken token = new UsernamePasswordToken(username, password);
                 try {
                     subject.login(token);
-                    return "redirect:/s/main.jsp";
+                    return new JsonResult();
                 } catch (UnknownAccountException e) {
-                    System.out.println("用户名错误!");
+                    System.out.println("用户名或者密码错误!");
                     e.printStackTrace();
+                    return new JsonResult(false, "用户名或者密码错误!");
                 } catch (IncorrectCredentialsException e) {
                     System.out.println("用户名或者密码错误!");
                     e.printStackTrace();
+                    return new JsonResult(false, "用户名或者密码错误!");
                 } catch (AuthenticationException e) {
                     System.out.println("未知错误!");
                     e.printStackTrace();
+                    return new JsonResult(false, "未知错误!");
                 }
             }
-            return "redirect:/s/login.jsp";
+            return new JsonResult(false, "用户名或者密码错误!");
         } else {
-            return "redirect:/s/login.jsp";
+            return new JsonResult(false, "验证码错误!");
         }
+    }
+
+    //登出:注销功能
+    @RequestMapping("/logout")
+    public String logout(){
+        //拿到主体完成登出
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        //跳回到登录页面
+        return "redirect:/login";
     }
 
 }

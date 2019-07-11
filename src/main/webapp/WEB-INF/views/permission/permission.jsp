@@ -1,15 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>易用宝，Dept管理</title>
+    <title>易用宝，Permission管理</title>
     <%@include file="/WEB-INF/views/head.jsp" %>
-    <script src="/js/model/dept.js"></script>
+    <script src="/js/model/permission.js"></script>
 </head>
 <body>
 
 <%--pagination:分页--%>
-<table id="deptGrid" class="easyui-datagrid"
-       data-options="url:'/dept/page',
+<table id="permissionGrid" class="easyui-datagrid"
+       data-options="url:'/permission/page',
        fitColumns:true,
        singleSelect:false,
        pagination:true,
@@ -18,9 +18,13 @@
        onRowContextMenu:showMenu">
     <thead>
     <tr>
-        <th data-options="field:'id',width:100">id</th>
-        <th data-options="field:'name',width:100">name</th>
-    </tr>
+                    <th data-options="field:'id',width:100">id</th>
+                    <th data-options="field:'name',width:100">名称</th>
+                    <th data-options="field:'url',width:100">路径</th>
+                    <th data-options="field:'descs',width:100">描述</th>
+                    <th data-options="field:'sn',width:100">编码</th>
+                    <th data-options="field:'menuId',width:100">菜单id</th>
+            </tr>
     </thead>
 </table>
 
@@ -52,14 +56,34 @@
 <div id="editDialog" class="easyui-dialog" title="功能编辑" style="width:400px;"
      data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <form id="editForm" method="post">
-        <input id="deptId" type="hidden" name="id"/>
+        <input id="permissionId" type="hidden" name="id"/>
         <table cellpadding="5">
-            <tr>
-                <td>name:</td>
+                    <tr>
+                <td>名称:</td>
                 <td><input class="easyui-validatebox" type="text" name="name"
                            data-options="required:true"/></td>
             </tr>
-        </table>
+                     <tr>
+                <td>路径:</td>
+                <td><input class="easyui-validatebox" type="text" name="url"
+                           data-options="required:true"/></td>
+            </tr>
+                     <tr>
+                <td>描述:</td>
+                <td><input class="easyui-validatebox" type="text" name="descs"
+                           data-options="required:true"/></td>
+            </tr>
+                     <tr>
+                <td>编码:</td>
+                <td><input class="easyui-validatebox" type="text" name="sn"
+                           data-options="required:true"/></td>
+            </tr>
+                     <tr>
+                <td>菜单id:</td>
+                <td><input class="easyui-validatebox" type="text" name="menuId"
+                           data-options="required:true"/></td>
+            </tr>
+                 </table>
     </form>
     <div style="text-align:center;padding:5px">
         <a href="javascript:void(0)" class="easyui-linkbutton" data-method="save">提交</a>

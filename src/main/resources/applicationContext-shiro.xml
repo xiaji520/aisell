@@ -41,9 +41,9 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <!-- 登录地址:如果你没有登录，就会去这个地方  -->
-        <property name="loginUrl" value="/s/login.jsp"/>
+        <property name="loginUrl" value="/login"/>
         <!-- 登录成功会进入的页面 -->
-        <property name="successUrl" value="/s/main.jsp"/>
+        <property name="successUrl" value="/main.jsp"/>
         <!-- 没有权限进入的页面 -->
         <property name="unauthorizedUrl" value="/s/unauthorized.jsp"/>
         <!--

@@ -4,8 +4,22 @@
     index 行的索引
  */
 function formatImage(value, row, index) {
-    return `<img src="${value}" width="55" height="55">`;
+    //return `<img src="${value}" width="55" height="55">`;
+    return ` <div class="jqzoom"><img src="${value}" width="55" height="55" jqimg="images/head/2.jpg"></div>`;
 }
+
+$(document).ready(function () {
+    $(document).ready(function(){
+        $(".jqzoom").jqueryzoom({
+            xzoom: 100, //设置放大 DIV 长度（默认为 200）
+            yzoom: 100, //设置放大 DIV 高度（默认为 200）
+            offset: 10, //设置放大 DIV 偏移（默认为 10）
+            position: "right", //设置放大 DIV 的位置（默认为右边）
+            preload:1,
+            lens:1
+        });
+    });
+});
 
 function formatDept(value) {
     return value ? value.name : "";

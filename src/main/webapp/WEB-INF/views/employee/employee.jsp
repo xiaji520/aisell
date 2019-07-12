@@ -9,9 +9,12 @@
     <title>易用宝,employee管理</title>
     <%@include file="/WEB-INF/views/head.jsp" %>
     <script src="/js/model/employee.js"></script>
+    <%--图片放大--%>
+    <link rel="stylesheet" href="/easyui/plugin/jqzoom/style/jqzoom.css" type="text/css" media="screen">
+<%--    <script type="text/javascript" src="/easyui/plugin/jqzoom/js/jquery.js"></script>--%>
+    <script type="text/javascript" src="/easyui/plugin/jqzoom/js/jquery.jqzoom.js"></script>
 </head>
 <body>
-
 
 <%--pagination:分页--%>
 <table id="employeeGrid" class="easyui-datagrid"
@@ -26,7 +29,7 @@
     <thead>
     <tr>
         <th data-options="field:'id',width:50,align:'center'">编号</th>
-        <th data-options="field:'headImage',width:50,formatter:formatImage,align:'center'">头像</th>
+            <th data-options="field:'headImage',width:50,formatter:formatImage,align:'center'">头像</th>
         <th data-options="field:'username',width:60,align:'center'" sortable="true">名称</th>
         <th data-options="field:'password',width:120">密码</th>
         <th data-options="field:'age',width:50,align:'center',editor:{type:'numberbox'}" sortable="true">年龄</th>

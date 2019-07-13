@@ -9,6 +9,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>无权限!!</h1>
+<h1 style="text-align: center">无权限!!</h1>
 </body>
 </html>

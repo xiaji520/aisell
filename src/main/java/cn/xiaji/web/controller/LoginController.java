@@ -2,6 +2,7 @@ package cn.xiaji.web.controller;
 //encoding: utf-8
 
 import cn.xiaji.common.JsonResult;
+import cn.xiaji.common.UserContext;
 import com.wf.captcha.Captcha;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.utils.CaptchaUtil;
@@ -105,6 +106,8 @@ public class LoginController {
                 UsernamePasswordToken token = new UsernamePasswordToken(username, password);
                 try {
                     subject.login(token);
+                    //把当前登录用户放到session中
+                    UserContext.putUser();
                     return new JsonResult();
                 } catch (UnknownAccountException e) {
                     System.out.println("用户名或者密码错误!");
@@ -120,7 +123,7 @@ public class LoginController {
                     return new JsonResult(false, "未知错误!");
                 }
             }
-            return new JsonResult(false, "用户名或者密码错误!");
+            return new JsonResult(false, "用户已登录!");
         } else {
             return new JsonResult(false, "验证码错误!");
         }
@@ -128,7 +131,7 @@ public class LoginController {
 
     //登出:注销功能
     @RequestMapping("/logout")
-    public String logout(){
+    public String logout() {
         //拿到主体完成登出
         Subject subject = SecurityUtils.getSubject();
         subject.logout();

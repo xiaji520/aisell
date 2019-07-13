@@ -1,6 +1,9 @@
 package cn.xiaji.service;
+
 import cn.xiaji.domain.Permission;
 
-public interface IPermissionService extends IBaseService<Permission, Long> {
+import java.util.Set;
 
+public interface IPermissionService extends IBaseService<Permission, Long> {
+    Set<String> findPermissionByUser(Long userId);
 }

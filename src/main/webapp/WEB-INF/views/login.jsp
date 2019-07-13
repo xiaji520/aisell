@@ -48,7 +48,7 @@
                         //如果登录失败，给出错误提示
                         $("#msg").text(result.msg);
                         setTimeout(function () {
-                            $("#msg").hide().text("");
+                            $("#msg").hide("slow").text("");
                         }, 2000);
                         $("#msg").show();
 
@@ -101,7 +101,7 @@
 
                     <div class="form-group">
                         <div class="field field-icon-right">
-                            <h3 id="msg" style="text-align: center;color: red"></h3>
+                            <h4 id="msg" style="text-align: center;color: red"></h4>
                         </div>
                     </div>
 

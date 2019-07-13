@@ -13,7 +13,7 @@
         $(function () {
             var mainTab = $("#mainTab");
             $('#menuTree').tree({
-                url: '/json/treeMenu.json',
+                url: '/util/loginUserMenus',
                 onClick: function (data) {
                     //获取路径
                     var url = data.url;
@@ -71,8 +71,7 @@
 <div data-options="region:'north'" style="height:100px;">
     <h1 style="text-align: center">易 用 宝</h1>
     <%-- shiro:principal：显示主体名称--%>
-    <div style="text-align: right;padding-right:20px;">欢迎您, <shiro:principal/> &emsp;<a href="/logout"
-                                                                                        style="color: GrayText">注销</a>
+    <div style="text-align: right;padding-right:20px;">欢迎您, <shiro:principal property="username"/> &emsp;<a href="/logout"  style="color: GrayText">注销</a>
     </div>
 </div>
 <div data-options="region:'west',title:'菜单',split:true" style="width:230px;">

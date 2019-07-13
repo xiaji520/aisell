@@ -3,6 +3,7 @@ package cn.xiaji.web.shiro;
 
 import cn.xiaji.domain.Employee;
 import cn.xiaji.service.IEmployeeService;
+import cn.xiaji.service.IPermissionService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -27,6 +28,8 @@ public class AISellRealm extends AuthorizingRealm {
 
     @Autowired
     private IEmployeeService employeeService;
+    @Autowired
+    private IPermissionService permissionService;
 
     @Override
     public String getName() {
@@ -37,14 +40,15 @@ public class AISellRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //1.拿到当前登录的用户
-        String username = (String) principalCollection.getPrimaryPrincipal();
+        Employee employee = (Employee) principalCollection.getPrimaryPrincipal();
         //2.根据登录用户拿到角色与权限
-        Set<String> roles = getRoles(username);
-        Set<String> permissions = getPermissions(username);
+        // Set<String> roles = getRoles(employee.getUsername());
+        //Set<String> permissions = getPermissions(employee.getUsername());
+        Set<String> permissions = permissionService.findPermissionByUser(employee.getId());
         //3.创建返回的权限对象
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         //把角色放到权限对象中去
-        authorizationInfo.setRoles(roles);
+        //authorizationInfo.setRoles(roles);
         authorizationInfo.setStringPermissions(permissions);
         return authorizationInfo;
     }
@@ -61,7 +65,7 @@ public class AISellRealm extends AuthorizingRealm {
     public Set<String> getPermissions(String username) {
         Set<String> perms = new HashSet<String>();
         perms.add("employee:*");
-        perms.add("dept:index");
+        /* perms.add("dept:index");*/
         return perms;
     }
 
@@ -80,7 +84,7 @@ public class AISellRealm extends AuthorizingRealm {
         //获取到盐值
         ByteSource salt = ByteSource.Util.bytes("xiaji");
         //getName():只是随便起的名
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, loginUser.getPassword(), salt, getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(loginUser, loginUser.getPassword(), salt, getName());
         return authenticationInfo;
     }
 

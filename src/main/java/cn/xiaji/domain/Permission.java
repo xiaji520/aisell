@@ -25,7 +25,6 @@ public class Permission extends BaseDomain {
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
-
     public String getName() {
         return name;
     }

@@ -2,7 +2,11 @@ package cn.xiaji.domain;
 //encoding: utf-8
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: xj
@@ -20,9 +24,20 @@ public class Menu extends BaseDomain {
     private String url;
     private String icon;
 
+    //通过多方找一方 子菜单找父菜单
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    private Menu menu;
+    @JsonIgnore //这里生成json的时候要忽略，否则会造成功能相互调用
+    private Menu parent;
+
+    //Transient：临时属性(JPA不管这个属性，和数据库没有关系)
+    @Transient
+    private List<Menu> children = new ArrayList<>();
+
+    //ajax需要
+    public String getText() {
+        return name;
+    }
 
     public String getName() {
         return name;
@@ -48,12 +63,20 @@ public class Menu extends BaseDomain {
         this.icon = icon;
     }
 
-    public Menu getMenu() {
-        return menu;
+    public Menu getParent() {
+        return parent;
     }
 
-    public void setMenu(Menu menu) {
-        this.menu = menu;
+    public void setParent(Menu parent) {
+        this.parent = parent;
+    }
+
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
     }
 
     @Override

@@ -59,6 +59,13 @@
             </value>
         </property>-->
         <property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"/>
+
+        <!--②自定义过滤器:把自定义过滤器加入到核心过滤器中-->
+        <property name="filters">
+            <map>
+                <entry key="aiSellPerms" value-ref="aiSellPerms"/>
+            </map>
+        </property>
     </bean>
 
     <!--实体工厂bean，把它返回值也变成一个bean-->
@@ -66,5 +73,6 @@
           factory-method="builderFilterChainDefinitionMap"/>
     <!-- 拿到生成map的工厂 -->
     <bean id="filterChainDefinitionMapFactory" class="cn.xiaji.web.shiro.FilterChainDefinitionMapFactory"/>
-
+    <!--①自定义过滤器:配置你的自定义过滤器-->
+    <bean id="aiSellPerms" class="cn.xiaji.web.shiro.AISellPermissionsAuthorizationFilter"/>
 </beans>

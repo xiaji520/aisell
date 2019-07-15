@@ -80,12 +80,13 @@
         <a href="#" data-method="clsRecycle" class="easyui-linkbutton" iconCls="icon-edit" plain="true">退出回收站</a>
     </div>
     <%--查询条--%>
-    <form id="searchForm">
+    <form id="searchForm" action="/employee/download">
         用户名:<input name="username" class="easyui-textbox" style="width:80px">
         邮箱:<input name="email" class="easyui-textbox" style="width:80px">
         部门:<input id="cc" name="departmentId" class="easyui-combobox" panelHeight="auto"
                   data-options="valueField:'id',textField:'name',url:'/util/dept'"/>
         <a href="#" data-method="search" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+        <button type="submit" class="easyui-linkbutton" iconCls="icon-search">导出Excel</button>
     </form>
 </div>
 

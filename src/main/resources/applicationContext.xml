@@ -22,7 +22,7 @@
     8.EasyUI
     -->
     <!--service的扫描-->
-    <context:component-scan base-package="cn.xiaji.service" />
+    <context:component-scan base-package="cn.xiaji.service"/>
 
     <!--读取jdbc.properties-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
@@ -71,8 +71,11 @@
     <jpa:repositories base-package="cn.xiaji.repository"
                       entity-manager-factory-ref="entityManagerFactory"
                       transaction-manager-ref="transactionManager"
-    factory-class="cn.xiaji.repository.BaseRepositoryFactoryBean"/>
+                      factory-class="cn.xiaji.repository.BaseRepositoryFactoryBean"/>
 
     <!--导入shiro-->
-    <import resource="classpath:applicationContext-shiro.xml" />
+    <import resource="classpath:applicationContext-shiro.xml"/>
+
+    <!--扫描common包-->
+    <context:component-scan base-package="cn.xiaji.common"/>
 </beans>

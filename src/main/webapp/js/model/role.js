@@ -19,6 +19,24 @@ function permsFormat(val) {
     return permsStr;
 }
 
+//双击打开编辑
+function onDblClickCell(index, field, value) {
+    if (value != null) {
+        var list = "";
+        for (var i = 0; i < value.length; i++) {
+            var name = value[i].name;
+            if (name != undefined) {
+                list += name + " ";
+            }
+        }
+        if (list != ""&&list.length>=25) {
+            alert(list)
+
+        }
+    }
+
+}
+
 $(function () {
     //获取常用组件(分页/查询条)
     var roleGrid = $("#roleGrid");
@@ -54,7 +72,7 @@ $(function () {
             //清空form中的数据
             editForm.form("clear");
             //清空左边grid的数据 loadData:加载本地数据，旧的行将被移除
-            userPermissionGrid.datagrid("loadData",[]);
+            userPermissionGrid.datagrid("loadData", []);
             //打开弹出框(居中)
             editDialog.dialog("center").dialog("open");
         },
@@ -75,7 +93,7 @@ $(function () {
                     //拿到role(左边的grid)中的所有权限
                     var rows = userPermissionGrid.datagrid("getRows");
                     //遍历它,拼接出相应的结构
-                    for(var i=0;i<rows.length;i++){
+                    for (var i = 0; i < rows.length; i++) {
                         var row = rows[i];
                         param[`permissions[${i}].id`] = row.id;
                     }
@@ -119,7 +137,7 @@ $(function () {
             //获取当前选中的行的所有权限
             //必需要拷备一个数组 不然会直接修改原数据
             var permissions = [...row.permissions];
-            userPermissionGrid.datagrid("loadData",permissions);
+            userPermissionGrid.datagrid("loadData", permissions);
         },
         //删除
         del() {

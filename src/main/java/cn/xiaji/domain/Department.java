@@ -2,6 +2,8 @@ package cn.xiaji.domain;
 //encoding: utf-8
 
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
 import javax.persistence.*;
 
 /**
@@ -15,6 +17,7 @@ import javax.persistence.*;
 @Entity//表示一个由jpa管理的持久对象,对应数据库的一个表
 @Table(name = "department")//table数据库的表名
 public class Department extends BaseDomain {
+    @Excel(name = "部门名称")
     private String name;
 
     public String getName() {

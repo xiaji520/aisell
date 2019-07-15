@@ -13,7 +13,7 @@
        fitColumns:true,
        singleSelect:false,
        pagination:true,
-       <%--onDblClickCell:onDblClickCell,--%>
+       onDblClickCell:onDblClickCell,
        toolbar:'#gridTools',
        onRowContextMenu:showMenu">
     <thead>

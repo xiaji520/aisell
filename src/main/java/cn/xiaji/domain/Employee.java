@@ -2,7 +2,12 @@ package cn.xiaji.domain;
 //encoding: utf-8
 
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +22,21 @@ import java.util.List;
 @Entity//表示一个由jpa管理的持久对象,对应数据库的一个表
 @Table(name = "employee")//table数据库的表名
 public class Employee extends BaseDomain {
+    @Excel(name = "用户名")
+    @NotNull(message = "用户名不能为空!")
     private String username;
+
     private String password;
+
+    @Excel(name = "邮箱", width = 25)
     private String email;
+
+    @Excel(name = "头像", type = 2, width = 10, height = 20)
     private String headImage;
+
+    @Excel(name = "年龄")
+    @Max(value = 100, message = "年龄不能超过100岁!")
+    @Min(value = 0, message = "年龄不能小于0岁!")
     @Column(length = 11)
     private Integer age;
     @Column(length = 1)

@@ -16,6 +16,9 @@ import javax.persistence.*;
 @Table(name = "systemdictionarytype")//table数据库的表名
 public class Systemdictionarytype extends BaseDomain {
 
+    public static final String PRODUCT_BRAND = "productBrand";//品牌sn
+    public static final String PRODUCT_UNIT = "productUnit";//单位sn
+
     /*@JoinColumn(unique = true)*/
     private String sn;
     private String name;

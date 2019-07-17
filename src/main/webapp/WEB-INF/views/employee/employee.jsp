@@ -27,7 +27,8 @@
        pagination:true,
        onDblClickCell:onDblClickCell,
        toolbar:'#gridTools',
-       onRowContextMenu:showMenu">
+       onRowContextMenu:showMenu,
+       onLoadSuccess:loadSuccess">
     <thead>
     <tr>
         <th data-options="field:'id',width:50,align:'center'">编号</th>
@@ -55,7 +56,7 @@
     <shiro:hasPermission name="employee:delete">
         <div data-options="iconCls:'icon-remove'" data-method="delMore">批量删除</div>
     </shiro:hasPermission>
-    <div data-options="iconCls:'icon-edit'" data-method="enableEmployee">批量恢复</div>
+    <div data-options="iconCls:'icon-reload'" data-method="enableEmployee">批量恢复</div>
 </div>
 
 <%--grid顶部工具栏--%>
@@ -75,9 +76,10 @@
             <a href="#" data-method="delMore" class="easyui-linkbutton" iconCls="icon-remove" plain="true">批量删除</a>
         </shiro:hasPermission>
         <a href="#" data-method="showRecycle" class="easyui-linkbutton" iconCls="icon-edit" plain="true">进入回收站</a>
-        <a id="enableEmployee" href="#" data-method="enableEmployee" class="easyui-linkbutton" iconCls="icon-edit"
+        <a id="enableEmployee" href="#" data-method="enableEmployee" class="easyui-linkbutton" iconCls="icon-reload"
            plain="true">批量恢复</a>
         <a href="#" data-method="clsRecycle" class="easyui-linkbutton" iconCls="icon-edit" plain="true">退出回收站</a>
+        <a href="/employee/index" class="easyui-linkbutton" iconCls="icon-reload" plain="true">返回第一页</a>
     </div>
     <%--查询条--%>
     <form id="searchForm" action="/employee/download">

@@ -4,8 +4,12 @@ package cn.xiaji.web.controller;
 import cn.xiaji.common.UserContext;
 import cn.xiaji.domain.Department;
 import cn.xiaji.domain.Employee;
+import cn.xiaji.domain.Producttype;
+import cn.xiaji.domain.Systemdictionarydetail;
 import cn.xiaji.service.IDepartmentService;
 import cn.xiaji.service.IMenuService;
+import cn.xiaji.service.IProducttypeService;
+import cn.xiaji.service.ISystemdictionarydetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +32,36 @@ public class UtilController {
     private IDepartmentService departmentService;
     @Autowired
     private IMenuService menuService;
+    @Autowired
+    private IProducttypeService producttypeService;
+    @Autowired
+    private ISystemdictionarydetailService systemdictionarydetailService;
 
     @RequestMapping("/dept")
     @ResponseBody
     public List<Department> findAllDepts() {
         return departmentService.findAll();
+    }
+
+    //拿类型
+    @RequestMapping("/types")
+    @ResponseBody
+    public List<Producttype> findAllTypes() {
+        return producttypeService.findAllTypes();
+    }
+
+    //拿单位
+    @RequestMapping("/unit")
+    @ResponseBody
+    public List<Systemdictionarydetail> findAllUnit() {
+        return systemdictionarydetailService.findAllUnit();
+    }
+
+    //拿品牌
+    @RequestMapping("/brand")
+    @ResponseBody
+    public List<Systemdictionarydetail> findAllBrand() {
+        return systemdictionarydetailService.findAllBrand();
     }
 
     //菜单栏

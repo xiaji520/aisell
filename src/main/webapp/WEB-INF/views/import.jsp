@@ -21,10 +21,12 @@
                     if (postf !== ".xlsx" && postf !== ".xls") {
                         $("#sub").attr('disabled', true);
                         alert('请输入后缀名为: *.xlsx或者 *.xls的文件, 而不是:*' + postf + '文件!')
+                        return false;
                     } else {
                         $("#sub").attr('disabled', false);
+                        return true;
                     }
-                },
+                }
             }
         });
 

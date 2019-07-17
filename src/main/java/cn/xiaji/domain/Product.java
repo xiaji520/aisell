@@ -25,6 +25,7 @@ public class Product extends BaseDomain  {
     private BigDecimal costPrice;
     @Column(columnDefinition = "decimal(19,2)")
     private BigDecimal salePrice;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "types_id")
     private Producttype types;

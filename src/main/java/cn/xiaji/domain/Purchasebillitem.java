@@ -2,6 +2,8 @@ package cn.xiaji.domain;
 //encoding: utf-8
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -19,17 +21,23 @@ public class Purchasebillitem  extends BaseDomain{
 
     @Column(columnDefinition = "decimal(19,2)")
     private BigDecimal price;
+
     @Column(columnDefinition = "decimal(19,2)")
     private BigDecimal num;
+
     @Column(columnDefinition = "decimal(19,2)")
     private BigDecimal amount;
+
     private String descs;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //组合关系,非空
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "bill_id")
+    @JsonIgnore //生成json的时候忽略这个属性
     private Purchasebill bill;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //多对一,非空,产品
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id")
     private Product product;
 

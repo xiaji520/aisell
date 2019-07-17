@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author: xj
  * @contact: xiaruji520@gmail.com
@@ -31,7 +33,12 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee, Long> impleme
 
     @Override
     public Employee findByUsername(String username) {
-        return  employeeRepository.findByUsername(username);
+        return employeeRepository.findByUsername(username);
+    }
+
+    @Override
+    public List<Employee> findBuyer() {
+        return employeeRepository.findByDepartment_Name("采购部");
     }
 
     //添加或更新 密码加密

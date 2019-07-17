@@ -35,4 +35,8 @@ public interface EmployeeRepository extends BaseRepository<Employee, Long> {
     //根据用户名与邮件模糊查询
     @Query("select o from Employee o where o.username like ?1 and o.email like ?2")
     List<Employee> queryByUsernameAndEmailLike(String uername, String email);
+
+    //查询采购员
+    List<Employee> findByDepartment_Name(String deptName);
+
 }

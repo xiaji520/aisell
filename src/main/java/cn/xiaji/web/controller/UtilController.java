@@ -2,14 +2,8 @@ package cn.xiaji.web.controller;
 //encoding: utf-8
 
 import cn.xiaji.common.UserContext;
-import cn.xiaji.domain.Department;
-import cn.xiaji.domain.Employee;
-import cn.xiaji.domain.Producttype;
-import cn.xiaji.domain.Systemdictionarydetail;
-import cn.xiaji.service.IDepartmentService;
-import cn.xiaji.service.IMenuService;
-import cn.xiaji.service.IProducttypeService;
-import cn.xiaji.service.ISystemdictionarydetailService;
+import cn.xiaji.domain.*;
+import cn.xiaji.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +30,12 @@ public class UtilController {
     private IProducttypeService producttypeService;
     @Autowired
     private ISystemdictionarydetailService systemdictionarydetailService;
+    @Autowired
+    private ISupplierService supplierService;
+    @Autowired
+    private IEmployeeService employeeService;
+    @Autowired
+    private IProductService productService;
 
     @RequestMapping("/dept")
     @ResponseBody
@@ -70,5 +70,27 @@ public class UtilController {
     public List loginUserMenus() {
         return menuService.findByUser();
     }
+
+    //返回所有的供应商
+    @RequestMapping("/findAllSupplier")
+    @ResponseBody
+    public List<Supplier> findAllSupplier() {
+        return supplierService.findAll();
+    }
+
+    //返回采购员
+    @RequestMapping("/findBuyer")
+    @ResponseBody
+    public List<Employee> findBuyer() {
+        return employeeService.findBuyer();
+    }
+
+    //返回采购员
+    @RequestMapping("/findProduct")
+    @ResponseBody
+    public List<Product> findProduct() {
+        return productService.findAll();
+    }
+
 
 }

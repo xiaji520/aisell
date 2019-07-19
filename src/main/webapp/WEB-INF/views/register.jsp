@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="renderer" content="webkit">
-    <title>登录</title>
+    <title>注册</title>
     <%@ include file="/WEB-INF/views/head.jsp" %>
 
     <link rel="stylesheet" href="/css/base.css">
@@ -34,7 +34,7 @@
         //提交form表单
         function submitForm() {
             $('#loginForm').form('submit', {
-                url: "/login",
+                url: "/register",
                 onSubmit: function () {
                     return $(this).form('validate');
                 },
@@ -43,7 +43,7 @@
                     var result = JSON.parse(data);
                     if (result.success) {
                         //如果登录成功，跳转到主页面
-                        window.location.href = "/main";
+                        window.location.href = "/login";
                     } else {
                         //如果登录失败，给出错误提示
                         $("#msg").text(result.msg);
@@ -70,23 +70,30 @@
             <div style="height:150px;"></div>
             <div class="media media-y margin-big-bottom">
             </div>
-            <form id="loginForm" action="/login" method="post" class="easyui-form">
+            <form id="loginForm" action="/register" method="post" class="easyui-form">
                 <div class="panel loginbox">
                     <div class="text-center margin-big padding-big-top">
-                        <h1>欢迎来到易用宝</h1>
+                        <h1>欢迎注册易用宝</h1>
                     </div>
                     <div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
                         <div class="form-group">
                             <div class="field field-icon-right">
                                 <input type="text" class="input input-big" name="username" id="username"
-                                       placeholder="请输入登录账号"/>
+                                       placeholder="请输入注册账号"/>
                                 <span class="icon icon-user margin-small"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="field field-icon-right">
                                 <input type="password" class="input input-big" name="password" id="password"
-                                       placeholder="请输入登录密码"/>
+                                       placeholder="请输入注册密码"/>
+                                <span class="icon icon-key margin-small"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field field-icon-right">
+                                <input type="password" class="input input-big" name="repassword" id="repassword"
+                                       placeholder="请再次输入注册密码"/>
                                 <span class="icon icon-key margin-small"></span>
                             </div>
                         </div>
@@ -99,11 +106,10 @@
                             </div>
                         </div>
                     </div>
-
                     <br>
                     <div class="form-group">
                         <div class="field">
-                            &emsp;&emsp;<a href="/register" style="color: #00aaee;font-size: 16px">注册</a>
+                            &emsp;&emsp;<a href="/login" style="color: #00aaee;font-size: 16px">返回登录</a>
                         </div>
                     </div>
 
@@ -115,7 +121,7 @@
 
                     <div style="padding:30px;">
                         <input type="button" id="button" class="button button-block bg-main text-big input-big"
-                               onclick="submitForm();" value="登录">
+                               onclick="submitForm();" value="注册">
                     </div>
                 </div>
             </form>

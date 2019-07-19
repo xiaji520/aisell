@@ -27,6 +27,7 @@ public class FilterChainDefinitionMapFactory {
         //设置放行
         maps.put("/s/*", "anon");
         maps.put("/login", "anon");
+        maps.put("/register", "anon");
         maps.put("/easyui/**", "anon");
         maps.put("/js/**", "anon");
         maps.put("/json/**", "anon");

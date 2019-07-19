@@ -39,4 +39,5 @@ public interface EmployeeRepository extends BaseRepository<Employee, Long> {
     //查询采购员
     List<Employee> findByDepartment_Name(String deptName);
 
+
 }

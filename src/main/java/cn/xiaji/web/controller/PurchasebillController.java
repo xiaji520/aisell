@@ -1,6 +1,8 @@
 package cn.xiaji.web.controller;
+
 import java.math.BigDecimal;
 import java.util.Date;
+
 import cn.xiaji.common.JsonResult;
 import cn.xiaji.common.UIPage;
 import cn.xiaji.domain.Purchasebill;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.List;
 
 @Controller
@@ -40,12 +43,15 @@ public class PurchasebillController extends BaseController {
         if (id != null && "_upd_".equals(cmd)) {
             Purchasebill purchasebill = purchasebillService.findOne(id);
             //解决n-to-n的问题
+            purchasebill.setSupplier(null);
+            purchasebill.setBuyer(null);
+            purchasebill.getItems().clear();
             return purchasebill;
         }
         return null;
     }
 
-    public JsonResult saveOrUpdate(Purchasebill purchasebill){
+    public JsonResult saveOrUpdate(Purchasebill purchasebill) {
         //拿到订单明细
         List<Purchasebillitem> items = purchasebill.getItems();
         //准备总数量与总金额
@@ -69,7 +75,7 @@ public class PurchasebillController extends BaseController {
             return new JsonResult();
         } catch (Exception e) {
             e.printStackTrace();
-            return new JsonResult(false,e.getMessage());
+            return new JsonResult(false, e.getMessage());
         }
     }
 

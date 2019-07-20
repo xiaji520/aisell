@@ -13,6 +13,9 @@ public interface EmployeeRepository extends BaseRepository<Employee, Long> {
     //验证用户名是否存在
     @Query("select count(o) from Employee o where o.username=?1")
     Long getCountByUsername(String username);
+    //验证邮箱是否存在
+    @Query("select count(o) from Employee o where o.email=?1")
+    Long getCountByEmail(String email);
 
     //根据用户名查询
     Employee findByUsername(String uername);
@@ -38,6 +41,10 @@ public interface EmployeeRepository extends BaseRepository<Employee, Long> {
 
     //查询采购员
     List<Employee> findByDepartment_Name(String deptName);
+
+    //根据邮箱查询
+    @Query("select o from Employee o where o.email=?1")
+    Employee queryByEmail(String email);
 
 
 }

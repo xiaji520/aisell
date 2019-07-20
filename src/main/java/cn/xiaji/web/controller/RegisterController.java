@@ -55,13 +55,11 @@ public class RegisterController {
         //判断验证码是否正确
         if (code.equals(captcha.toLowerCase())) {
             System.out.println("register验证码成功!");
-            System.out.println(username + "-----" + password + "--------" + repassword);
             //判断两次密码是否一致
             if (!password.equals(repassword)) {
                 return new JsonResult(false, "两次密码不一致!");
             } else if (password.isEmpty() || username.isEmpty()) {
                 //判断账号和密码是否为空
-                System.out.println("2222222");
                 return new JsonResult(false, "账号或密码不能为空!");
             } else if (!employeeService.checkUsername(username)) {
                 //判断用户名是否存在

@@ -10,8 +10,9 @@ package cn.xiaji.common;
 
  */
 public class JsonResult {
-    private boolean success=true;
+    private boolean success = true;
     private String msg;
+
 
     public JsonResult() {
     }
@@ -20,6 +21,7 @@ public class JsonResult {
         this.success = success;
         this.msg = msg;
     }
+
 
     public boolean isSuccess() {
         return success;
@@ -36,4 +38,6 @@ public class JsonResult {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+
 }

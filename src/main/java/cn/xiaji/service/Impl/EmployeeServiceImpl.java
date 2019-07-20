@@ -30,6 +30,11 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee, Long> impleme
     public Boolean checkUsername(String username) {
         return !(employeeRepository.getCountByUsername(username) > 0);
     }
+    //验证邮箱是否存在 存在返回false
+    @Override
+    public Boolean checkEmail(String email) {
+        return !(employeeRepository.getCountByEmail(email) > 0);
+    }
 
     @Override
     public Employee findByUsername(String username) {

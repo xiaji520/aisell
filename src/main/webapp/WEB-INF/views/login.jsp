@@ -103,7 +103,7 @@
                     <br>
                     <div class="form-group">
                         <div class="field">
-                            &emsp;&emsp;<a href="/register" style="color: #00aaee;font-size: 16px">注册</a>
+                            &emsp;&emsp;<a href="/register" style="color: #00aaee;font-size: 16px">注册</a> / <a href="/forgetPwd" style="color: #00aaee;font-size: 16px">找回密码</a>
                         </div>
                     </div>
 

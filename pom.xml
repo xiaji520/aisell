@@ -168,6 +168,25 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.5</version>
         </dependency>
+        <!--邮件包-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.5</version>
+        </dependency>
+
+        <!--报错导入-->
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+
         <!-- 測試包 -->
         <dependency>
             <groupId>junit</groupId>
@@ -219,16 +238,16 @@
             <version>1.4.0</version>
         </dependency>
         <!-- poi支持的jar包 -->
-       <!-- <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.11</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>org.apache.poi</groupId>
+             <artifactId>poi</artifactId>
+             <version>3.11</version>
+         </dependency>
+         <dependency>
+             <groupId>org.apache.poi</groupId>
+             <artifactId>poi-ooxml</artifactId>
+             <version>3.11</version>
+         </dependency>-->
 
         <!-- easypoi的支持 -->
         <dependency>

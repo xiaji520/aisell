@@ -28,6 +28,8 @@ public class FilterChainDefinitionMapFactory {
         maps.put("/s/*", "anon");
         maps.put("/login", "anon");
         maps.put("/register", "anon");
+        maps.put("/forgetPwd", "anon");
+        maps.put("/setPwd", "anon");
         maps.put("/easyui/**", "anon");
         maps.put("/js/**", "anon");
         maps.put("/json/**", "anon");

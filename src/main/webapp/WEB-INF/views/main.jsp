@@ -57,7 +57,9 @@
                     } else if (item.text == "关闭所有窗口") {
                         var tabs = $('#mainTab').tabs('tabs');
                         //第0个位置的面板不关闭
-                        for (var i = 1; i <= tabs.length; i++) {
+                        //注意,该处需要将将tabs长度单独定义出来,否则无法实现全部关闭(写在for里每次关闭后都会去判断)
+                        var s = tabs.length;
+                        for (var i = 1; i <= s; i++) {
                             //注意，这时永远关掉第一个面板
                             $('#mainTab').tabs('close', 1);
                         }

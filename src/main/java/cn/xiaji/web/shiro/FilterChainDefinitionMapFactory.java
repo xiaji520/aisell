@@ -51,6 +51,7 @@ public class FilterChainDefinitionMapFactory {
             //maps.put(url, "perms[" + sn + "]");
             //改为自定义的
             maps.put(url, "aiSellPerms[" + sn + "]");
+            System.out.println("aiSellPerms[" + sn + "]");
         }
         //设置拦截所有
         maps.put("/**", "authc");

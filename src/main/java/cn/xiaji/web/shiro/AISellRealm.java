@@ -38,6 +38,7 @@ public class AISellRealm extends AuthorizingRealm {
     //进行授权判断(权限)
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        System.out.println("11111111111111111111");
         //1.拿到当前登录的用户
         Employee employee = (Employee) principalCollection.getPrimaryPrincipal();
         //2.根据登录用户拿到角色与权限
